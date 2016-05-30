@@ -1,10 +1,10 @@
 % References, choose bst-file
-\bibliographystyle{elsart-num}
+\bibliographystyle{apacite}
 
 % PDF Metadata and link styles
 \hypersetup{
-		pdftitle={Master's Thesis: },%
-		pdfauthor={Jonas Einarsson},%
+		pdftitle={},%
+		pdfauthor={},%
     colorlinks=true,%
     citecolor=black,%
     filecolor=black,%
@@ -15,28 +15,27 @@
 % Dropping initial letter color
 \renewcommand{\LettrineFontHook}{\color[gray]{0.5}}
 
-% Chapter headings style (fncychap)
-\makeatletter
-\ChNumVar{} % sets the style for digit
-\ChTitleVar{\Huge\bfseries\centering} % sets the style for title
-\ChRuleWidth{4pt} % Set RW=4pt
-\ChNameUpperCase % Make name uppercase
-\renewcommand{\DOCH}{
-\centering
-{\CNoV {\fontsize{60pt}{20pt}\selectfont\thechapter} }
-\vskip 40\p@}
-\renewcommand{\DOTI}[1]{%
-\CTV\FmTi{#1}\par\nobreak
-\vskip 40\p@}
-\renewcommand{\DOTIS}[1]{%
-\CTV\FmTi{#1}\par\nobreak
-\vskip 40\p@}
-\makeatother
+\usepackage{titlesec}		
+\titleformat{\chapter}[display]
+  {\Huge\bfseries\filcenter}
+  {{\fontsize{40pt}{18pt}\vspace{-10.2ex}\selectfont \textnormal{\thechapter}}}{1ex}{}[]
+\renewcommand{\texttt}[1]{%
+  \begingroup
+  \ttfamily
+  \begingroup\lccode`~=`/\lowercase{\endgroup\def~}{/\discretionary{}{}{}}%
+  \begingroup\lccode`~=`[\lowercase{\endgroup\def~}{[\discretionary{}{}{}}%
+  \begingroup\lccode`~=`.\lowercase{\endgroup\def~}{.\discretionary{}{}{}}%
+  \catcode`/=\active\catcode`[=\active\catcode`.=\active
+  \scantokens{#1\noexpand}%
+  \endgroup
+}
+
+
 
 % Single page abstract
-\renewenvironment{abstract}%
-{\begin{center} \bfseries \abstractname \end{center}}%
-{\vspace{2\baselineskip}}%
+% \renewenvironment{abstract}%
+% {\begin{center} \bfseries \abstractname \end{center}}%
+% {\vspace{2\baselineskip}}%
 
 % Figure & Table captions
 \captionsetup{margin=10pt,font=small,labelfont=bf}
@@ -45,8 +44,9 @@
 \addtolength{\headheight}{\baselineskip}
 
 % Fancyheader (see packagescommands.tex for default/special)
-\pagestyle{fancy}
-\setdefaulthdr
+% \fancyhf{}
+% \fancyhead[C]{\thepage}
+% \pagestyle{fancy}
 
 % Stolen settings (unknown origin):
 % Alter some LaTeX defaults for better treatment of figures:
@@ -68,3 +68,18 @@
 \renewcommand{\dblfloatpagefraction}{0.7}	% require fuller float pages
 
 % remember to use [htp] or [htpb] for placement
+
+
+\graphicspath{{fig/}}
+
+\newcites{pri}{References}
+\newcites{slr}{Articles included in SLR}
+
+
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\newcommand{\quotes}[1]{``#1''}
+\DeclareFloatingEnvironment[placement={!ht},name=List]{mylist}
+
+\setlength{\parindent}{0cm}

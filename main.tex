@@ -1,9 +1,6 @@
 %%%%%
 %%
-%% Chalmers University of Technology Master's Thesis Template
-%%
-%% Jonas Einarsson (2010)
-%% Adapted from work by Joel Goop
+%% Master's Thesis Template
 %%
 %% Uses references.bib as Bibtex source
 %% Uses elsevier numerical style .bst (change in settings.tex)
@@ -18,7 +15,7 @@
 
 % Settings (Metadata)
 \input{include/settings}
-
+\patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
 \begin{document}
 
 % Title page and abstract
@@ -27,37 +24,41 @@
 % Table of contents
 \newpage
 \pagenumbering{roman}
-\setcounter{page}{1}
-\pagestyle{fancy}
+% \pagestyle{fancy}
 \setspecialhdr
 \tableofcontents
 
 % Main area
 \newpage
-\setdefaulthdr
-\pagenumbering{arabic}	
-\setcounter{page}{1}
+\pagenumbering{arabic}
+\fancyfoot[C]{\thepage}
+\pagestyle{plain}
 
 % Content
 \input{include/introduction}
-\input{include/realtimesystems}
-\input{include/deploymentenvironment}
+\input{include/background}
 \input{include/methodology}
+\input{include/theory}
+\input{include/discussion}
+\input{include/conclusion}
 
 \newpage
 \clearpage
 
-% Nocite references
-\nocite{Brody1996}
 
-\bibliography{references} % references.bib
-\addcontentsline{toc}{chapter}{\numberline{} Bibliography} % For pdf
+
+
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliographystylepri{apacite}
+\bibliography{include/backmatter/references}
+
+
 \setspecialhdr
 
 \newpage
 
 % Appendices
-\appendix
+% \appendix
 \setdefaulthdr
 %\input{include/appendix1}
 \end{document}
